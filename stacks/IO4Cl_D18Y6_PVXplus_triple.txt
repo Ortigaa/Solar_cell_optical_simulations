@@ -1,0 +1,26 @@
+Description
+Triple junction cell with PM6:IO4Cl, D18:Y6 and PVXplus
+
+Stack
+air	np.inf	1
+glass	1.1e6	nk_glass
+ITO	185	nk_ITO_185_nm
+ZnO1	30	nk_ZnO
+IO4Cl	80	nk_PM6_IO4Cl
+HTLX1	30	nk_htlx
+AI1	30	nk_PEDOT_AI
+ZnO2	30	nk_ZnO
+D18Y6	100	nk_D18_Y6
+HTLX2	30	nk_htlx
+AI2	30	nk_PEDOT_AI
+ZnO3	30	nk_ZnO
+PVXplus	80	nk_pvxplus
+HTLX3	30	nk_htlx
+Ag	100	nk_Ag
+air2	np.inf	1
+
+Parameters
+Voc = 2.78
+Jsc = 12.1
+FF = 0.48
+Eff = 16.14

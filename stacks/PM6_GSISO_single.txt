@@ -1,0 +1,18 @@
+Description
+Single PM6:GS-ISO in inverted geometry with usual stack
+
+Stack
+air	np.inf	1
+glass	1.1e6	nk_glass
+ITO	185	nk_ITO_185_nm
+ZnO	15	nk_ZnO
+GSISO	100	nk_PM6_GSiso
+HTLX	30	nk_htlx
+Ag	100	nk_Ag
+air2	np.inf	1
+
+Parameters
+Voc = 2.29
+Jsc = 8.1
+FF = 0.5
+Eff = 9.8

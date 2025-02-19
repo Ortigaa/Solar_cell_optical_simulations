@@ -1,0 +1,30 @@
+Description
+4-junction cell with 4 PVXplus subcells
+
+Stack
+air	np.inf	1
+glass	1.1e6	nk_glass
+ITO	185	nk_ITO_185_nm
+ZnO1	30	nk_ZnO
+BTA3	85	nk_PBDBT_BTA3
+HTLX1	30	nk_htlx
+AI1	30	nk_PEDOT_AI
+ZnO2	30	nk_ZnO
+BTPec9	80	nk_PM6_BTPeC9
+HTLX2	30	nk_htlx
+AI2	30	nk_PEDOT_AI
+ZnO3	30	nk_ZnO
+PVXplus	80	nk_pvxplus
+HTLX3	30	nk_htlx
+AI3	30	nk_PEDOT_AI
+ZnO4	30	nk_ZnO
+PVXplus1	80	nk_pvxplus
+HTLX4	30	nk_htlx
+Ag	100	nk_Ag
+air2	np.inf	1
+
+Parameters
+Voc = 1.68
+Jsc = 20.0
+FF = 0.72
+Eff = 22.7

@@ -1,0 +1,26 @@
+Description
+Triple junction cell with PM6:GS-ISO, PVXplus and PCE10:COi8DFIC subcells
+
+Stack
+air	np.inf	1
+glass	1.1e6	nk_glass
+ITO	185	nk_ITO_185_nm
+ZnO1	30	nk_ZnO
+GSISO	100	nk_PM6_GSiso
+HTLX1	30	nk_htlx
+AI1	30	nk_PEDOT_AI
+ZnO2	30	nk_ZnO
+BTPec9	80	nk_PM6_BTPeC9
+HTLX2	30	nk_htlx
+AI2	30	nk_PEDOT_AI
+ZnO3	30	nk_ZnO
+Coi8DFIC	80	nk_PCE10_Coi8DFIC
+HTLX3	30	nk_htlx
+Ag	100	nk_Ag
+air2	np.inf	1
+
+Parameters
+Voc = 2.7
+Jsc = 11.7
+FF = 0.55
+Eff = 16.7
