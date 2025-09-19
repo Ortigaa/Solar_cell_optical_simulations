@@ -218,17 +218,17 @@ nk_db = import_nk(nk_folder)
 #                       [lambda x:1, nk_db.nk_glass, lambda x:1])
 
 
-# single_PVXplus = Stack("PVXplus_single",
-#                        "Test of single junction PVXplus",
-#                         {"air": np.inf,
-#                         "glass": 1.1e6,
-#                         "ITO": 185,
-#                         "ZnO": 30,
-#                         "PVXplus": 100,
-#                         "HTLX": 30,
-#                         "Ag": 100,
-#                         "air2": np.inf},
-#                         [lambda x:1, nk_db.nk_glass, nk_db.nk_ITO_185_nm, nk_db.nk_ZnO, nk_db.nk_pvxplus, nk_db.nk_htlx, nk_db.nk_Ag, lambda x:1])
+single_PVXplus = Stack("PVXplus_single",
+                       "Test of single junction PVXplus",
+                        {"air": np.inf,
+                        "glass": 1.1e6,
+                        "ITO": 185,
+                        "ZnO": 30,
+                        "PVXplus": 100,
+                        "HTLX": 30,
+                        "Ag": 100,
+                        "air2": np.inf},
+                        [lambda x:1, nk_db.nk_glass, nk_db.nk_ITO_185_nm, nk_db.nk_ZnO, nk_db.nk_pvxplus, nk_db.nk_htlx, nk_db.nk_Ag, lambda x:1])
 
 # Import an external stack from a file
 # GS_ISO_2x_PVXplus = parse_external_stack("GS_ISO_2x_PVXplus.txt")

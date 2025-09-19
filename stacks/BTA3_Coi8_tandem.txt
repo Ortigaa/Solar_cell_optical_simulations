@@ -1,0 +1,22 @@
+Description
+Tandem with PM6:BTA3, and PM6:Coi8DFIC
+
+Stack
+air	np.inf	1
+glass	1.1e6	nk_glass
+ITO	185	nk_ITO_185_nm
+ZnO1	30	nk_ZnO
+BTA3	85	nk_PBDBT_BTA3
+HTLX1	30	nk_htlx
+AI1	30	nk_PEDOT_AI
+ZnO2	30	nk_ZnO
+Coi8DFIC	80	nk_PCE10_Coi8DFIC
+HTLX2	30	nk_htlx
+Ag	100	nk_Ag
+air2	np.inf	1
+
+Parameters
+Voc = 1.67
+Jsc = 11.2
+FF = 0.62
+Eff = 11.61

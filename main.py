@@ -53,7 +53,7 @@ os.chdir(dname)
 #%% Test and instructions
 # Create the simulation class from the stack, in this case a stack defined on 
 # stacks.py
-test = Simulation(stacks.single_PVXplus)
+test = Simulation(stacks.single_PVXplus, light_source="LowLight")
 
 # Perform a single calculation for the given stack
 # On the simulation class the resulting optics and currents can be found
@@ -166,7 +166,7 @@ IO4Cl_single_sim.stack_absorption()
 
 #%% Tandem cells
 
-#%%% Tandem with PPM6:PCBM and PVX plus subcells
+#%%% Tandem with PM6:PCBM and PVX plus subcells
 # Create simulation object
 PCBM_PVXplus_sim = Simulation(stacks.parse_external_stack("PCBM_PVXplus_tandem.txt"))
 
@@ -258,6 +258,40 @@ BTA3_BTP_sim.thickness_variation({"BTA3":np.arange(50,120, 5),
 BTA3_BTP_sim.plot_current_map(export=True)
 
 BTA3_BTP_sim.plot_absorption(layers=BTA3_BTP_sim.find_max_current(), export=True)
+
+#%%% tandem with PBDBT:BTA3 and PCE10:COi8DFIC
+
+# Import from file
+BTA3_Coi8_tandem = stacks.parse_external_stack("BTA3_Coi8_tandem.txt")
+# Create simulation object
+BTA3_Coi8_sim = Simulation(BTA3_Coi8_tandem)
+#Perform thickness variation
+BTA3_Coi8_sim.thickness_variation({"BTA3":np.arange(50,120, 5),
+                                    "Coi8DFIC":np.arange(50, 120, 5)})
+
+# Plot the current map
+BTA3_Coi8_sim.plot_current_map(export=True)
+
+BTA3_Coi8_sim.plot_absorption(layers=BTA3_Coi8_sim.find_max_current(), export=True)
+
+BTA3_Coi8_sim.print_row(BTA3_Coi8_sim.find_max_current())
+
+#%%% tandem with PBDBT:BTA3 and PCE10:IEICO2F
+
+# Import from file
+BTA3_IEICO2F_tandem = stacks.parse_external_stack("BTA3_IEICO2F_tandem.txt")
+# Create simulation object
+BTA3_IEICO2F_sim = Simulation(BTA3_IEICO2F_tandem)
+#Perform thickness variation
+BTA3_IEICO2F_sim.thickness_variation({"BTA3":np.arange(50,120, 5),
+                                    "IEICO2F":np.arange(50, 120, 5)})
+
+# Plot the current map
+BTA3_IEICO2F_sim.plot_current_map(export=True)
+
+BTA3_IEICO2F_sim.plot_absorption(layers=BTA3_IEICO2F_sim.find_max_current(), export=True)
+
+BTA3_IEICO2F_sim.print_row(BTA3_IEICO2F_sim.find_max_current())
 
 #%%% tandem with PM6:GS-ISO and BTA3 (same as before but reversed layers)
 
@@ -457,10 +491,19 @@ PVXplus_sim = Simulation(PVXplus_tandem)
 PVXplus_sim.thickness_variation({"PVXplus1":np.arange(50, 120, 10),
                                     "PVXplus2":np.arange(50, 120, 10)})
 
+# # PEDOT thickness variation, with the optimal PVX layer thickness fixed
+# PVXplus_sim.thickness_variation({"HTLX1":np.arange(40, 50, 5),
+#                                  "AI1":np.arange(40, 50, 5),
+#                                  "HTLX2":np.arange(40, 50, 5)})
+
 # Plot the current map
-PVXplus_sim.plot_current_map()
+# PVXplus_sim.plot_current_map()
 # Plot absorption at the combination with maximum current
-PVXplus_sim.plot_absorption(layers=PVXplus_sim.find_max_current())
+PVXplus_sim.plot_absorption(layers=PVXplus_sim.find_max_current(), export=True)
+
+PVXplus_sim.print_row(PVXplus_sim.find_max_current())
+
+PVXplus_sim.print_row(fixed_layers={"PVXplus1":80, "PVXplus2":90})
 
 #%%% tandem with PVXplus and D18:Y6
 
@@ -478,8 +521,76 @@ PVXplus_D18Y6_sim.plot_current_map()
 # Plot absorption at the combination with maximum current
 PVXplus_D18Y6_sim.plot_absorption(layers=PVXplus_D18Y6_sim.find_max_current())
 
+#%%% tandem with PTQ10:FCC-Cl and PM6:BTP-ec9
 
+# Import from file
+PTQ_BTP_tandem = stacks.parse_external_stack("PTQFCC_BTPec9_tandem.txt")
+# Create simulation object
+PTQ_BTP_sim = Simulation(PTQ_BTP_tandem)
+#Perform thickness variation
+PTQ_BTP_sim.thickness_variation({"PTQ":np.arange(50,200, 10),
+                                    "BTPec9":np.arange(50, 120, 10)})
 
+# Plot the current map
+PTQ_BTP_sim.plot_current_map(export=True)
+
+PTQ_BTP_sim.plot_absorption(layers=PTQ_BTP_sim.find_max_current(), export=True)
+
+PTQ_BTP_sim.print_row(PTQ_BTP_sim.find_max_current())
+
+#%%% tandem with PTQ10:FCC-Cl and PVXplus
+
+# Import from file
+PTQ_PVX_tandem = stacks.parse_external_stack("PTQFCC_PVXplus_tandem.txt")
+# Create simulation object
+PTQ_PVX_sim = Simulation(PTQ_PVX_tandem)
+#Perform thickness variation
+PTQ_PVX_sim.thickness_variation({"PTQ":np.arange(50,200, 10),
+                                    "PVXplus":np.arange(50, 120, 10)})
+
+# Plot the current map
+PTQ_PVX_sim.plot_current_map(export=True)
+
+PTQ_PVX_sim.plot_absorption(layers=PTQ_PVX_sim.find_max_current(), export=True)
+
+PTQ_PVX_sim.print_row(PTQ_PVX_sim.find_max_current())
+
+#%%% tandem with D18:FCC-Cl and PVXplus
+
+# Import from file
+D18_PVX_tandem = stacks.parse_external_stack("D18-FCC_PVXplus_tandem.txt")
+# Create simulation object
+# D18_PVX_sim = Simulation(D18_PVX_tandem)
+# Low light simulation
+D18_PVX_sim = Simulation(D18_PVX_tandem, light_source="LowLight")
+#Perform thickness variation
+D18_PVX_sim.thickness_variation({"D18FCC":np.arange(30,200, 10),
+                                    "PVXplus":np.arange(50, 200, 10)})
+
+# Plot the current map
+D18_PVX_sim.plot_current_map(export=True)
+
+D18_PVX_sim.plot_absorption(layers=D18_PVX_sim.find_max_current(), export=True)
+
+D18_PVX_sim.print_row(D18_PVX_sim.find_max_current())
+
+#%%% tandem with PM6:D18:L8-BO and PVXplus
+
+# Import from file
+ternary_PVX_tandem = stacks.parse_external_stack("PM6-D18-L8BO_PVXplus_tandem.txt")
+# Create simulation object
+# ternary_PVX_sim = Simulation(ternary_PVX_tandem)
+ternary_PVX_sim = Simulation(ternary_PVX_tandem, light_source="LowLight")
+#Perform thickness variation
+ternary_PVX_sim.thickness_variation({"PM6D18":np.arange(30,200, 10),
+                                    "PVXplus":np.arange(30, 200, 10)})
+
+# Plot the current map
+ternary_PVX_sim.plot_current_map(export=True)
+
+ternary_PVX_sim.plot_absorption(layers=ternary_PVX_sim.find_max_current(), export=True)
+
+ternary_PVX_sim.print_row(ternary_PVX_sim.find_max_current())
 #%% Triple junction cell simulations
 
 #%%% Triple cell with GS-ISO and 2 PVX-plus subcells
@@ -528,14 +639,16 @@ triple_junction = stacks.parse_external_stack("BTA3_GSISO_PVXplus_triple.txt")
 # Create simulation object
 triple_junction_sim = Simulation(triple_junction)
 #Perform thickness variation
-triple_junction_sim.thickness_variation({"BTA3":np.arange(50,140,10),
-                                         "GSISO":np.arange(80, 190, 10),
-                                         "PVXplus":np.arange(50, 120, 10)})
+triple_junction_sim.thickness_variation({"BTA3":np.arange(40,80,10),
+                                         "GSISO":np.arange(100, 190, 10),
+                                         "PVXplus":np.arange(30, 60, 10)})
 
 # Plot the current map
 # triple_junction_sim.plot_current_map()
 # Plot absorption at the combination with maximum current
 triple_junction_sim.plot_absorption(layers=triple_junction_sim.find_max_current())
+
+triple_junction_sim.print_row(triple_junction_sim.find_max_current())
 
 #%%% Triple cell with PM6:IO4Cl, D18:Y6 and PVXplus
 
@@ -862,6 +975,24 @@ PVXplus_homo_triple_sim.thickness_variation({"PVXplus1":np.arange(50,120,10),
 
 # Plot absorption at the combination with maximum current
 PVXplus_homo_triple_sim.plot_absorption(layers=PVXplus_homo_triple_sim.find_max_current())
+
+#%%% Triple cell with PBDB-T:BTA3, D18:FCC-Cl and PVXplus
+
+# Import from file
+triple_junction = stacks.parse_external_stack("BTA3_D18FCC_PVXplus_triple.txt")
+
+# Create simulation object
+triple_junction_sim = Simulation(triple_junction)
+#Perform thickness variation
+triple_junction_sim.thickness_variation({"BTA3":np.arange(30,100,10),
+                                         "D18FCC":np.arange(180, 300, 10),
+                                         "PVXplus":np.arange(180, 300, 10)})
+
+
+# Plot absorption at the combination with maximum current
+triple_junction_sim.plot_absorption(layers=triple_junction_sim.find_max_current())
+# Print the values at the maximum current point
+triple_junction_sim.print_row(triple_junction_sim.find_max_current())
 
 #%% 4-junction simulations
 

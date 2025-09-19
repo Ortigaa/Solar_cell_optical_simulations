@@ -42,14 +42,8 @@ except ModuleNotFoundError as imp_error:
 # =============================================================================
 
 #Files
-# standard AM1.5 solar spectrum
-# You can find the original at rredc.nrel.gov/solar/spectra/am1.5
-spectrum = np.genfromtxt('sun_scout.csv', delimiter=',') # W/m2*nm
-# Convert units
-photon_spectrum = functions.convert_spectrum_np(spectrum) #p/m2*s*nm
-# Create a function to interpolate
-AM15 = interp1d(photon_spectrum[:, 0], photon_spectrum[:, 1]*c.e*1e-1) #number of photons*q
-# functions.plot_spectrum(spectrum, convert=(True))
+
+# Global definitions
 EQE_folder = "EQE/"
 outFolder = "output/"
 
@@ -59,18 +53,49 @@ class Simulation:
     
     """
     
-    def __init__(self, stack):
+    def __init__(self, stack, light_source="AM15"):
         self.th = 0 # Incident angle
         self.polarization = 's' # Polarization of light
         self.lambda_step = 2 # wavelenght resolution
         self.lambda_list = np.arange(302, 1100, self.lambda_step) # Wavelenght scanned
         self.stack = stack
-        self.light_source = AM15(self.lambda_list) # Spectrum of light source
+        self.light_source_name = light_source
+        self.light_source = self.get_spectrum(light_source)(self.lambda_list) # Spectrum of light source in the desired wavelenght range
         self.name = stack.name
+        
+    def get_spectrum(self, light_source):
+        """
+        Generate the spectrum of the light source with correct units.
+
+        Parameters
+        ----------
+        light_source : str
+            Definition of the light source. For now can be "1sun" or "LowLight"
+
+        Returns
+        -------
+        light_source : func
+            Interpolation function of the original spectrum
+
+        """
+        if light_source == "AM15":
+            # standard AM1.5 solar spectrum
+            # You can find the original at rredc.nrel.gov/solar/spectra/am1.5
+            spectrum = np.genfromtxt('sun_scout.csv', delimiter=',') # W/m2*nm
+            
+        if light_source == "LowLight":
+            # Low light spectrum
+            spectrum = np.genfromtxt('BrandmeierLEDSosi_spectrum_warmwhite.txt', delimiter='\t')
+        
+        # Convert units
+        photon_spectrum = functions.convert_spectrum_np(spectrum) #p/m2*s*nm
+        # Create a function to interpolate
+        light_source = interp1d(photon_spectrum[:, 0], photon_spectrum[:, 1]*c.e*1e-1, bounds_error=False, fill_value="extrapolate") #number of photons*q
+        return light_source
         
     def importEQE(self, filenames):
         """
-        Import and EQE file.
+        Import an EQE file.
 
         Parameters
         ----------
@@ -264,7 +289,7 @@ class Simulation:
         Parameters
         ----------
         layers : dict, optional
-            Dictionary containing the names (str, as keys) and thickness (int or float, as values).
+            Dictionary containing the names (str, as keys) and thickness (int or float, as values)
             of layers in the stack that we want to plot the absorption for. The default is {}.
 
         Returns
@@ -299,7 +324,7 @@ class Simulation:
             outArray = wavelenght
             for i, name in enumerate(list(layers.keys())):
                 outArray = np.vstack((outArray, np.array([value[i] for value in absorp])))
-            outName = outFolder+self.name+"_layer_absorption.txt"
+            outName = outFolder+self.name+"_"+self.light_source_name+"_layer_absorption.txt"
             outHeader = "Wavelenght [nm]"
             for name in list(layers.keys()):
                 outHeader += "\t" + name + " Jsc [mA/cm2]"
@@ -392,7 +417,7 @@ class Simulation:
             ax.set(xlabel='{} thickness [nm]'.format(axes_labels[0]), ylabel='{} thickness [nm]'.format(axes_labels[1]))
             if export:
                 # Create dataFilename
-                outName = outFolder+self.name+"_current_map.txt"
+                outName = outFolder+self.name+"_"+self.light_source_name+"_current_map.txt"
                 # Stack the currents matrix with the first axis
                 outData = np.vstack((np.array(thickness_list[1]), np.array(currents)))
                 # Create a new axis with a leading zero, so it has the dimensions
@@ -541,3 +566,4 @@ class Simulation:
             main_mask = main_mask & (self.results_thickness[l] == t)
         data = self.results_thickness[main_mask]["Data"].iloc[0]["Output"]
         print(data)
+        

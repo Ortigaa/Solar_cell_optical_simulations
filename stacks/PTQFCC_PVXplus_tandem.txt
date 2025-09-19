@@ -1,0 +1,22 @@
+Description
+Tandem cell with PTQ10:FCC-Cl as first subcell and PBDB-T:BTPec9 as second subcell
+
+Stack
+air	np.inf	1
+glass	1.1e6	nk_glass
+ITO	185	nk_ITO_185_nm
+ZnO1	30	nk_ZnO
+PTQ	85	nk_PTQ10_FCC-Cl
+HTLX1	30	nk_htlx
+AI1	30	nk_PEDOT_AI
+ZnO2	30	nk_ZnO
+PVXplus	80	nk_pvxplus
+HTLX2	30	nk_htlx
+Ag	100	nk_Ag
+air2	np.inf	1
+
+Parameters
+Voc = 1.86
+Jsc = 13.4
+FF = 0.5
+Eff = 12.4

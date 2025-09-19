@@ -5,12 +5,12 @@ Stack
 air	np.inf	1
 glass	1.1e6	nk_glass
 ITO	185	nk_ITO_185_nm
-ZnO1	30	nk_ZnO
+ZnO1	15	nk_ZnO
 PVXplus1	80	nk_pvxplus
 HTLX1	30	nk_htlx
 AI1	30	nk_PEDOT_AI
-ZnO2	30	nk_ZnO
-PVXplus2	80	nk_pvxplus
+ZnO2	15	nk_ZnO
+PVXplus2	90	nk_pvxplus
 HTLX2	30	nk_htlx
 Ag	100	nk_Ag
 air2	np.inf	1

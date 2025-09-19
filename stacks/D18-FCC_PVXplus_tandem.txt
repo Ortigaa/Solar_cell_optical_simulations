@@ -1,0 +1,22 @@
+Description
+Tandem cell with PM6:PCBM as first subcell and PVXplus as second subcell
+
+Stack
+air	np.inf	1
+glass	1.1e6	nk_glass
+ITO	185	nk_ITO_185_nm
+ZnO1	30	nk_ZnO
+D18FCC	80	nk_D18_FCCCl
+HTLX1	30	nk_htlx
+AI1	30	nk_PEDOT_AI
+ZnO2	30	nk_ZnO
+PVXplus	80	nk_pvxplus
+HTLX2	30	nk_htlx
+Ag	100	nk_Ag
+air2	np.inf	1
+
+Parameters
+Voc = 1.79
+Jsc = 16.04
+FF = 0.76
+Eff = 21.82
