@@ -85,7 +85,7 @@ class Simulation:
             
         if light_source == "LowLight":
             # Low light spectrum
-            spectrum = np.genfromtxt('BrandmeierLEDSosi_spectrum_warmwhite.txt', delimiter='\t')
+            spectrum = np.genfromtxt('test_LED_warm_500lux.txt', delimiter='\t')
         
         # Convert units
         photon_spectrum = functions.convert_spectrum_np(spectrum) #p/m2*s*nm

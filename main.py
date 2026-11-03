@@ -50,6 +50,8 @@ except ModuleNotFoundError as imp_error:
 abspath = os.path.abspath(__file__)
 dname = os.path.dirname(abspath)
 os.chdir(dname)
+
+
 #%% Test and instructions
 # Create the simulation class from the stack, in this case a stack defined on 
 # stacks.py
@@ -80,20 +82,6 @@ test.plot_j_vs_t("PVXplus", "PVXplus")
 # Plot the absorption of one layer with the selected thickness
 # Export the plot data to a txt file
 test.plot_absorption(layers={"PVXplus":55}, export=True)
-#%% tandem with PM6:GSISO and D18:Y6 for Ershuai
-
-# Import from file
-GSISO_D18Y6_tandem_Ershuai = stacks.parse_external_stack("GSISO_D18Y6_tandem_Ershuai.txt")
-# Create simulation object
-GSISO_D18Y6_er_sim = Simulation(GSISO_D18Y6_tandem_Ershuai)
-#Perform thickness variation
-GSISO_D18Y6_er_sim.thickness_variation({"GSISO":np.arange(60, 120, 5),
-                                    "D18Y6":np.arange(60, 110, 5)})
-
-# Plot the current map
-GSISO_D18Y6_er_sim.plot_current_map(export=True)
-# Plot absorption at the combination with maximum current
-GSISO_D18Y6_er_sim.plot_absorption(layers=GSISO_D18Y6_er_sim.find_max_current())
 
 #%% Single PM6:GSISO in standard architecture for Ershuai
 
